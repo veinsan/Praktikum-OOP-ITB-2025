@@ -3,6 +3,7 @@ public class Item {
   private double price;
   private int stock;
   private double discount; // discount percentage (0-100)
+
   /**
    * Constructor
    * 
@@ -15,14 +16,12 @@ public class Item {
    *                                  "Harga tidak boleh negatif."
    */
   public Item(String name, double price, int stock) throws InvalidQuantityException, InvalidPriceException {
-    if (stock < 0) {
-      throw new InvalidQuantityException("Stok tidak boleh negatif.");
-    } else if (price < 0) {
-      throw new InvalidPriceException("Harga tidak boleh negatif.");
-    }
+    if (stock < 0) throw new InvalidQuantityException("Stok tidak boleh negatif.");
+    if (price < 0) throw new InvalidPriceException("Harga tidak boleh negatif.");
     this.name = name;
     this.price = price;
     this.stock = stock;
+    this.discount = 0;
   }
 
   public String getName() {
@@ -49,9 +48,7 @@ public class Item {
    *                                  "Diskon harus antara 0-100%."
    */
   public void setDiscount(double discount) throws InvalidDiscountException {
-    if (discount > 100 || discount < 0) {
-      throw new InvalidDiscountException("Diskon harus antara 0-100%.");
-    }
+    if (discount < 0 || discount > 100) throw new InvalidDiscountException("Diskon harus antara 0-100%.");
     this.discount = discount;
   }
 
@@ -67,10 +64,8 @@ public class Item {
    *                                  "Jumlah stok yang ditambahkan tidak boleh negatif."
    */
   public void addStock(int quantity) throws InvalidQuantityException {
-    if (quantity < 0) {
-      throw new InvalidQuantityException("Jumlah stok yang ditambahkan tidak boleh negatif.");
-    }
-    stock += quantity;
+    if (quantity < 0) throw new InvalidQuantityException("Jumlah stok yang ditambahkan tidak boleh negatif.");
+    this.stock+= quantity;
   }
 
   /**
@@ -83,12 +78,9 @@ public class Item {
    *                                  "Stok tidak mencukupi. Tersedia: <stock>, Diminta: <quantity>"
    */
   public void reduceStock(int quantity) throws InvalidQuantityException, OutOfStockException {
-    if (quantity < 0) {
-      throw new InvalidQuantityException("Jumlah stok yang dikurangi tidak boleh negatif.");
-    } else if (stock < quantity) {
-      throw new OutOfStockException("Stok tidak mencukupi. Tersedia: " + stock + ", Diminta: " + quantity);
-    }
-    stock -= quantity;
+    if (quantity < 0) throw new InvalidQuantityException("Jumlah stok yang dikurangi tidak boleh negatif.");
+    if (stock < quantity) throw new OutOfStockException("Stok tidak mencukupi. Tersedia: " + this.stock + ", Diminta: " + quantity);
+    this.stock -= quantity;
   }
 
   @Override
@@ -100,5 +92,3 @@ public class Item {
     return name + " - Harga: Rp" + price + ", Stok: " + stock;
   }
 }
-
-

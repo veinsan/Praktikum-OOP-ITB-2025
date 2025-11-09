@@ -31,13 +31,9 @@ public class OrderingSystem {
    * @throws NullPointerException   Jika item null
    */
   public void addItem(Item item) throws DuplicateItemException {
-    if (item == null) {
-      throw new NullPointerException("Item tidak boleh null.");
-    }
-    for (Item i : items){
-      if (i.getName().equalsIgnoreCase(item.getName())) {
-        throw new DuplicateItemException("Item dengan nama '" + item.getName() + "' sudah ada.");
-      }
+    if (item == null) throw new NullPointerException();
+    for(Item i : items){
+      if (i.getName().equalsIgnoreCase(item.getName())) throw new DuplicateItemException("Item dengan nama '" + item.getName() + "' sudah ada.");
     }
     items.add(item);
   }
@@ -54,9 +50,7 @@ public class OrderingSystem {
    * @throws NullPointerException Jika customer null
    */
   public void addCustomer(Customer customer) {
-    if (customer == null) {
-      throw new NullPointerException("Customer tidak boleh null.");
-    }
+    if (customer == null) throw new NullPointerException("Customer tidak boleh null.");
     customers.add(customer);
   }
 
@@ -74,12 +68,12 @@ public class OrderingSystem {
    * @throws ItemNotFoundException Jika item tidak ditemukan
    */
   public Item findItem(String name) throws ItemNotFoundException {
-    for (Item item : items) {
-      if (item.getName().equalsIgnoreCase(name)) {
-        return item;
+    for(Item i : items){
+      if (i.getName().equalsIgnoreCase(name)){
+        return i;
       }
     }
-    throw new ItemNotFoundException("Item dengan nama '" + name + "' tidak ditemukan.");
+    throw new ItemNotFoundException("Item '" + name + "' tidak ditemukan.");
   }
 
   /**
@@ -96,12 +90,12 @@ public class OrderingSystem {
    * @throws CustomerNotFoundException Jika customer tidak ditemukan
    */
   public Customer findCustomer(String name) throws CustomerNotFoundException {
-    for (Customer customer : customers) {
-      if (customer.getName().equalsIgnoreCase(name)) {
-        return customer;
+    for(Customer i : customers){
+      if (i.getName().equalsIgnoreCase(name)){
+        return i;
       }
     }
-    throw new CustomerNotFoundException("Customer dengan nama '" + name + "' tidak ditemukan.");
+    throw new CustomerNotFoundException("Customer '" + name + "' tidak ditemukan.");
   }
 
   /**
@@ -133,13 +127,19 @@ public class OrderingSystem {
   public void processOrder(String customerName, String itemName, int quantity)
       throws ItemNotFoundException, OutOfStockException, InvalidQuantityException,
       InsufficientBalanceException, CustomerNotFoundException, OrderLimitExceededException {
-    Customer customer = findCustomer(customerName);
-    customer.incrementOrderCount();
-    Item item = findItem(itemName);
-    double total = item.getFinalPrice() * quantity;
-    customer.deductBalance(total);
-    item.reduceStock(quantity);
-    System.out.println("Pesanan berhasil! " + customerName + " membeli " + quantity + " " + itemName + " seharga Rp" + total);
+      Customer temp = findCustomer(customerName);
+      temp.incrementOrderCount();
+      Item tempitem = findItem(itemName);
+      double price = tempitem.getFinalPrice() * quantity;
+      temp.deductBalance(price);
+      try{
+        tempitem.reduceStock(quantity);
+        System.out.println("Pesanan berhasil! " + customerName + " membeli " + quantity + " " + itemName + " seharga Rp" + price);
+      } catch (OutOfStockException e){
+        temp.addBalance(price);
+        throw new OutOfStockException("Stok tidak mencukupi. Tersedia: " + tempitem.getStock() + ", Diminta: " + quantity);
+      }
+
   }
 
   /**

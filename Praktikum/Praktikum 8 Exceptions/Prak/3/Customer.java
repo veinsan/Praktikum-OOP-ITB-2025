@@ -13,9 +13,7 @@ public class Customer {
    *                                  "Saldo tidak boleh negatif."
    */
   public Customer(String name, double balance) throws InvalidQuantityException {
-    if (balance < 0) {
-      throw new InvalidQuantityException("Saldo tidak boleh negatif.");
-    }
+    if (balance < 0) throw new InvalidQuantityException("Saldo tidak boleh negatif.");
     this.name = name;
     this.balance = balance;
   }
@@ -39,10 +37,8 @@ public class Customer {
    *                                     "Customer '<name>' telah mencapai batas maksimum order (<max_orders>)."
    */
   public void incrementOrderCount() throws OrderLimitExceededException {
-    if (orderCount >= MAX_ORDERS_PER_CUSTOMER) {
-      throw new OrderLimitExceededException("Customer '" + name + "' telah mencapai batas maksimum order (" + MAX_ORDERS_PER_CUSTOMER + ").");
-    }
-    orderCount++;
+    if (this.orderCount >= MAX_ORDERS_PER_CUSTOMER) throw new OrderLimitExceededException(String.format("Customer '%s' telah mencapai batas maksimum order (10).", this.name, MAX_ORDERS_PER_CUSTOMER));
+    this.orderCount++;
   }
 
   /**
@@ -53,10 +49,8 @@ public class Customer {
    *                                  "Jumlah top-up tidak boleh negatif."
    */
   public void addBalance(double amount) throws InvalidQuantityException {
-    if (amount < 0) {
-      throw new InvalidQuantityException("Jumlah top-up tidak boleh negatif.");
-    }
-    balance += amount;
+    if (amount < 0) throw new InvalidQuantityException("Jumlah top-up tidak boleh negatif.");
+    this.balance += amount;
   }
 
   /**
@@ -69,12 +63,9 @@ public class Customer {
    *                                     "Saldo tidak mencukupi. Saldo: Rp<balance>, Dibutuhkan: Rp<amount>"
    */
   public void deductBalance(double amount) throws InvalidQuantityException, InsufficientBalanceException {
-    if (amount < 0) {
-      throw new InvalidQuantityException("Jumlah pengurangan tidak boleh negatif.");
-    } else if (balance < amount) {
-      throw new InsufficientBalanceException("Saldo tidak mencukupi. Saldo: Rp" + balance + ", Dibutuhkan: Rp" + amount);
-    }
-    balance -= amount;
+    if (amount < 0) throw new InvalidQuantityException("Jumlah pengurangan tidak boleh negatif.");
+    if (balance < amount) throw new InsufficientBalanceException("Saldo tidak mencukupi. Saldo: Rp" + this.balance + ", Dibutuhkan: Rp" + amount);
+    this.balance -= amount;
   }
 
   @Override
