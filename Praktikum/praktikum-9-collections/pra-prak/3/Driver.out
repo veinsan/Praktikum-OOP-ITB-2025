@@ -1,0 +1,4 @@
+Inputs: [0.5, 0.3, 0.9]
+Neuron 1 output: 0.715042
+Neuron 2 output: 0.629483
+Layer outputs: [0.715042, 0.629483]
