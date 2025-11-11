@@ -13,27 +13,30 @@ public class Patient implements Comparable<Patient> {
        Tidak ada keluaran (void). */
     public Patient(String name, int age, boolean critical) {
         // Type your code
+        this.name = name;
+        this.age = age;
+        this.critical = critical;
     }
 
     /* TODO : Lengkapi method getName()
        Mengembalikan nama pasien (String). */
     public String getName() {
         // Type your code
-        return null;
+        return name;
     }
 
     /* TODO : Lengkapi method getAge()
        Mengembalikan umur pasien (int). */
     public int getAge() {
         // Type your code
-        return 0;
+        return age;
     }
 
     /* TODO : Lengkapi method isCritical()
        Mengembalikan nilai boolean apakah pasien termasuk critical (true/false). */
     public boolean isCritical() {
         // Type your code
-        return false;
+        return critical;
     }
 
     /* TODO : Lengkapi method compareTo(Patient other)
@@ -49,7 +52,15 @@ public class Patient implements Comparable<Patient> {
     @Override
     public int compareTo(Patient other) {
         // Type your code
-        return 0;
+        if (this.critical && !other.critical) {
+            return -1;
+        }
+        else if (!this.critical && other.critical) {
+            return 1;
+        }
+        else {
+            return this.name.compareToIgnoreCase(other.name);
+        }
     }
 
     /* TODO : Lengkapi method toString()
@@ -60,6 +71,10 @@ public class Patient implements Comparable<Patient> {
     @Override
     public String toString() {
         // Type your code
-        return null;
+        if (critical) {
+            return name + " (" + age + ") [Critical]";
+        } else {
+            return name + " (" + age + ")";
+        }
     }
 }
