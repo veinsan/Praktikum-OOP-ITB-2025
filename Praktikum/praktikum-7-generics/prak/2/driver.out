@@ -1,0 +1,27 @@
+=== WAREHOUSE MANAGEMENT SYSTEM - DEMO ===
+
+1. Products: Electronics, Food, Clothing
+  Laptop [E001] - 2.50kg [Warranty: 24 months] | Category: Electronics
+  Rice [F001] - 10.00kg [Expiry: 2025-12-31] | Expiry: 2025-12-31
+  T-Shirt [C001] - 0.20kg [Size: M] | Size: M
+
+2. Container: add/remove/get items, check full/empty
+  Container[C001] (2/3 items) | Full: false
+  After removal: Size=1
+
+3. Shelf: holds multiple containers
+  Shelf[S001] (2/3 containers, 2 total items) | Total items: 2
+
+  Items in shelf:
+    - Tablet [E001] - 0.50kg [Warranty: 12 months]
+    - Rice [F001] - 10.00kg [Expiry: 2025-12-31]
+
+4. WarehouseManager: findByCategory, calculateTotalWeight, transferItems
+  Found 2 Electronics
+  Total weight: 13.3kg
+  Transferred: 1 items
+  Final sizes - SRC: 1 | DST: 1
+
+5. Advanced Integration: Complete warehouse with shelves, containers, tracker
+  Electronics Shelf: 2 items, 8.0kg
+  Food Shelf: 2 items, 35.0kg
