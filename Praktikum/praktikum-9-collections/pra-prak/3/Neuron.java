@@ -8,9 +8,9 @@ public class Neuron {
     public Neuron(List<Double> weights, double bias, ActivationFunction activation) {
         // TODO:
         // Simpan daftar bobot, nilai bias, dan fungsi aktivasi ke atribut kelas.
-        this.weights = null;
-        this.bias = 0.0;
-        this.activation = null;
+        this.weights = weights;
+        this.bias = bias;
+        this.activation = activation;
     }
 
     public double computeOutput(List<Double> inputs) {
@@ -19,6 +19,12 @@ public class Neuron {
         // 2. Tambah total penjumlahan dengan bias
         // 3. Kembalikan hasil dari fungsi activate() dengan inputnya adalah nilai dari
         // poin (2)
-        return 0.0;
+        double sum = 0.0;
+
+        for (int i = 0; i < weights.size(); i++) {
+            sum += weights.get(i) * inputs.get(i);
+        }
+        sum += bias;
+        return activation.activate(sum);
     }
 }

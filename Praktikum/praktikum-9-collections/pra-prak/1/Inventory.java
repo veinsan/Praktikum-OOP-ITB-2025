@@ -37,6 +37,10 @@ public class Inventory {
    * @param maxWeight
    */
   public Inventory(int rows, int cols, double maxWeight) {
+    this.rows = rows;
+    this.cols = cols;
+    this.maxWeight = maxWeight;
+    
   }
 
   /**
