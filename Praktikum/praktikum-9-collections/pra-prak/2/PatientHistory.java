@@ -12,6 +12,7 @@ public class PatientHistory {
        Tidak ada nilai kembalian. */
     public void addRecord(Patient p) {
         // Type your code
+        history.add(p);
     }
 
     /* TODO : Lengkapi method sortByName()
@@ -21,6 +22,7 @@ public class PatientHistory {
        Tidak ada nilai kembalian. */
     public void sortByName() {
         // Type your code
+        Collections.sort(history, (p1, p2) -> p1.getName().compareToIgnoreCase(p2.getName()));
     }
 
     /* TODO : Lengkapi method searchByName(String name)
@@ -31,6 +33,11 @@ public class PatientHistory {
        Output: Patient atau null. */
     public Patient searchByName(String name) {
         // Type your code
+        for (Patient p : history){
+            if (name.equalsIgnoreCase(p.getName())){
+                return p;
+            }
+        }
         return null;
     }
 
@@ -42,5 +49,14 @@ public class PatientHistory {
        Tidak ada nilai kembalian. */
     public void displayHistory() {
         // Type your code
+        System.out.println("Patient History:");
+        if (history.isEmpty()){
+            System.out.println("- (empty)");
+        }
+        else{
+            for (Patient p : history){
+                System.out.println("- " + p.toString());
+            }
+        }    
     }
 }

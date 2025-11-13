@@ -11,6 +11,7 @@ public class PatientQueue {
        Tidak ada nilai kembalian (void). */
     public void addPatient(Patient p) {
         // Type your code
+        queue.add(p);
     }
 
     /* TODO : Lengkapi method serveNext()
@@ -21,7 +22,7 @@ public class PatientQueue {
        Return: Patient yang dilayani. */
     public Patient serveNext() {
         // Type your code
-        return null;
+        return queue.poll();
     }
 
     /* TODO : Lengkapi method peekNext()
@@ -31,7 +32,7 @@ public class PatientQueue {
        Alasan: memeriksa siapa yang akan dilayani berikutnya tanpa mengubah antrian. */
     public Patient peekNext() {
         // Type your code
-        return null;
+        return queue.peek();
     }
 
     /* TODO : Lengkapi method displayQueue()
@@ -43,6 +44,15 @@ public class PatientQueue {
        Tidak ada nilai kembalian. */
     public void displayQueue() {
         // Type your code
+        System.out.println("Current Queue:");
+        if (queue.isEmpty()){
+            System.out.println("- (empty)");
+        }
+        else{
+            for (Patient p : queue){
+                System.out.println("- " + p.toString());
+            }
+        }    
     }
 
     /* TODO : Lengkapi method isEmpty()
@@ -50,6 +60,6 @@ public class PatientQueue {
        Return true jika kosong, false jika tidak. */
     public boolean isEmpty() {
         // Type your code
-        return false;
+        return queue.isEmpty();
     }
 }

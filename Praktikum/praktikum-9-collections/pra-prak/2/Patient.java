@@ -55,12 +55,10 @@ public class Patient implements Comparable<Patient> {
         if (this.critical && !other.critical) {
             return -1;
         }
-        else if (!this.critical && other.critical) {
+        if (!this.critical && other.critical) {
             return 1;
         }
-        else {
-            return this.name.compareToIgnoreCase(other.name);
-        }
+        return this.name.compareToIgnoreCase(other.name);
     }
 
     /* TODO : Lengkapi method toString()
@@ -71,9 +69,10 @@ public class Patient implements Comparable<Patient> {
     @Override
     public String toString() {
         // Type your code
-        if (critical) {
+        if (critical == true){
             return name + " (" + age + ") [Critical]";
-        } else {
+        }
+        else {
             return name + " (" + age + ")";
         }
     }
