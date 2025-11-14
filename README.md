@@ -14,7 +14,7 @@ Belum tersedia
 ---
 
 ## 📂 Isi Repo
-Kode yang digunakan untuk seluruh praktikum OOP tahun 2025
+Kode yang digunakan untuk seluruh praktikum OOP tahun 2025.
 Setiap folder berisi file `.java`, dan beberapa praktikum dilengkapi dengan input–output atau berkas pendukung lainnya
 
 ---
