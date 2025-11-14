@@ -90,7 +90,9 @@ public class SuperCollection {
         for (int element : collection) {
             int complement = targetSum - element;
             if (isThere.contains(complement)) {
-                String pair = element < complement ? element + "+" + complement : complement + "+" + element;
+                int a = Math.min(element, complement);
+                int b = Math.max(element, complement);
+                String pair = a + "+" + b + "=" + targetSum;                
                 pairs.add(pair);
             }
             isThere.add(element);
