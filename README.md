@@ -8,7 +8,7 @@
 
 ---
 
-## ⚙️ Nilai Praktikum
+## ⚙️ Nilai Total Praktikum
 Belum tersedia
 
 ---
